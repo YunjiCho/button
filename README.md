@@ -1,9 +1,23 @@
-# Skeuomorphic Buttons (Realistic 3D effect)
+# 히틀러 음성 버튼
 
-A Pen created on CodePen.io. Original URL: [https://codepen.io/jouanmarcel/pen/RwweKqb](https://codepen.io/jouanmarcel/pen/RwweKqb).
+간단한 음성 재생 버튼 프로젝트입니다.
 
-Skeuomorphism was used on the earlier iPhones and was made popular by it as well for UI design. It got mostly deprecated by flat design, as skeuomorphic elements are harder to create, maintain and scale across different platforms. You will notice, that the style doesn't work out nicely when you change a single color like the background. Play with it, learn what happens and how it is done, but I would not recommend to use it on your website / app. It's 2020 anyway and skeuomorphism is still out, otherwise you should at least wait a couple of years til it's considered vintage, retro and trendy again 💁
+## 기능
+- 3개의 히틀러 음성 재생 버튼
+- 음성 멈추기 버튼
+- 스큐어모피즘 디자인의 3D 버튼 효과
 
-Designed for: https://rgb.wiki/button
+## 사용 방법
+1. 버튼을 클릭하면 히틀러 음성이 재생됩니다
+2. 같은 버튼을 다시 누르면 처음부터 다시 재생됩니다
+3. 멈추기 버튼을 누르면 재생 중인 음성이 정지됩니다
 
-WiFi icon from typicons: https://github.com/stephenhutchings/typicons.font
+## 기술 스택
+- HTML
+- CSS
+- JavaScript
+
+## 설치 및 실행
+1. 저장소를 클론합니다
+2. `dist/audio` 폴더에 '히틀러.mp3' 파일을 넣습니다
+3. `index.html`을 브라우저에서 실행합니다
