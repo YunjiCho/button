@@ -48,16 +48,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // 각 버튼별 볼륨 설정
             switch(audioFile) {
                 case '1.mp3':
-                    gainNode.gain.value = 3.0;  // 1번 파일 3배로 수정
+                    gainNode.gain.value = 3.0;  // 1번 파일 3배
                     break;
                 case '2.mp3':
-                    gainNode.gain.value = 3.0;  // 2번 파일 3배로 수정
+                    gainNode.gain.value = 3.0;  // 2번 파일 3배
                     break;
                 case '3.mp3':
                     gainNode.gain.value = 1.0;  // 3번 파일 기본 볼륨
                     break;
                 case '4.mp3':
-                    gainNode.gain.value = 3.0;  // 4번 파일 3배
+                    gainNode.gain.value = 1.8;  // 4번 파일 1.8배로 수정
                     break;
                 default:
                     gainNode.gain.value = 1.0;
