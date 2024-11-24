@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let audioContext = null;
     let gainNode = null;
     
-    const playIcon = '▶';
-    const pauseIcon = '⏸';
+    const playIcon = '1';
+    const pauseIcon = '⏸️';
     
-    buttons.forEach(button => {
-        button.querySelector('span').textContent = playIcon;
+    buttons.forEach((button, index) => {
+        button.querySelector('span').textContent = (index + 1).toString();
         
         button.addEventListener('click', function() {
             const audioFile = this.dataset.audio;
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentButton === this) {
                 if (currentVideo && !currentVideo.paused) {
                     currentVideo.pause();
-                    buttonSpan.textContent = playIcon;
+                    buttonSpan.textContent = (index + 1).toString();
                 } else if (currentVideo) {
                     currentVideo.play();
                     buttonSpan.textContent = pauseIcon;
@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentVideo) {
                 currentVideo.pause();
                 if (currentButton) {
-                    currentButton.querySelector('span').textContent = playIcon;
+                    const prevIndex = Array.from(buttons).indexOf(currentButton);
+                    currentButton.querySelector('span').textContent = (prevIndex + 1).toString();
                 }
             }
 
@@ -41,16 +42,26 @@ document.addEventListener('DOMContentLoaded', function() {
             currentVideo.style.display = 'none';
             currentVideo.src = `audio/${audioFile}`;
             
-            // 오디오 컨텍스트 생성
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const source = audioContext.createMediaElementSource(currentVideo);
             gainNode = audioContext.createGain();
 
-            // 4번 파일의 경우 볼륨을 크게
-            if (audioFile === '4.mp3') {
-                gainNode.gain.value = 5.0;  // 소리를 5배로 증폭
-            } else {
-                gainNode.gain.value = 1.0;  // 다른 파일들은 기본 볼륨
+            // 각 버튼별 볼륨 설정
+            switch(audioFile) {
+                case '1.mp3':
+                    gainNode.gain.value = 2.0;  // 1번 파일 2배
+                    break;
+                case '2.mp3':
+                    gainNode.gain.value = 2.0;  // 2번 파일 2배
+                    break;
+                case '3.mp3':
+                    gainNode.gain.value = 1.0;  // 3번 파일 기본 볼륨
+                    break;
+                case '4.mp3':
+                    gainNode.gain.value = 3.0;  // 4번 파일 3배
+                    break;
+                default:
+                    gainNode.gain.value = 1.0;
             }
 
             source.connect(gainNode);
@@ -63,11 +74,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             currentVideo.play().catch(error => {
                 console.error('재생 중 오류 발생:', error);
-                buttonSpan.textContent = playIcon;
+                buttonSpan.textContent = (index + 1).toString();
             });
 
             currentVideo.onended = function() {
-                buttonSpan.textContent = playIcon;
+                buttonSpan.textContent = (index + 1).toString();
                 document.body.removeChild(currentVideo);
                 currentVideo = null;
                 currentButton = null;
