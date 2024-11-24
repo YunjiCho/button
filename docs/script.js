@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     gainNode.gain.value = 1.0;  // 3번 파일 기본 볼륨
                     break;
                 case '4.mp3':
-                    gainNode.gain.value = 1.8;  // 4번 파일 1.8배로 수정
+                    gainNode.gain.value = 1.0;  // 4번 파일 1.0배(기본값)로 수정
                     break;
                 default:
                     gainNode.gain.value = 1.0;
