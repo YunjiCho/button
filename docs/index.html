@@ -2,17 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Skeuomorphic Buttons (Realistic 3D effect)</title>
+  <title>Sound Buttons</title>
   <link rel="stylesheet" href="./style.css">
+  <style>
+    .grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 60px;
+      padding: 20px;
+    }
+
+    .button {
+      width: 150px !important;
+      height: 150px !important;
+      border-radius: 50% !important;
+    }
+
+    .button span {
+      font-size: 36px !important;
+    }
+  </style>
 </head>
 <body>
 <div class="grid">
-  <div class="button" role="button" data-audio="히틀러.mp3"><span>Adolf Hitler</span></div>
-  <div class="button" role="button" data-audio="히틀러.mp3"><span>Adolf Hitler</span></div>
-  <div class="button" role="button" data-audio="히틀러.mp3"><span>Adolf Hitler</span></div>
-  <div class="button" role="button"><span>Not focusable</span></div>
-  <div class="button" role="button"><span>Not focusable</span></div>
-  <div class="button" role="button"><span>멈추기</span></div>
+  <div class="button" role="button" data-audio="1.mp3"><span>1</span></div>
+  <div class="button" role="button" data-audio="2.mp3"><span>2</span></div>
+  <div class="button" role="button" data-audio="3.mp3"><span>3</span></div>
+  <div class="button" role="button" data-audio="4.mp3"><span>4</span></div>
 </div>
 <script src="./script.js"></script>
 </body>
