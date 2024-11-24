@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.button[data-audio]');
     let currentVideo = null;
     let currentButton = null;
-    let audioContext = null;
+    let audioContext = new (window.AudioContext || window.webkitAudioContext)();
     let gainNode = null;
     
     const playIcon = '▶';
@@ -33,58 +33,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            if (audioContext) {
-                audioContext.close();
-            }
-
-            currentVideo = document.createElement('audio');
-            currentVideo.style.display = 'none';
-            currentVideo.src = `audio/${audioFile}`;
+            currentVideo = new Audio(`audio/${audioFile}`);
+            currentVideo.preload = 'auto';
             
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const source = audioContext.createMediaElementSource(currentVideo);
             gainNode = audioContext.createGain();
-
-            // 각 버튼별 볼륨 설정
-            switch(audioFile) {
-                case '1.mp3':
-                    gainNode.gain.value = 2.4;  // 1번 파일 2.4배로 수정
-                    break;
-                case '2.mp3':
-                    gainNode.gain.value = 2.4;  // 2번 파일 2.4배로 수정
-                    break;
-                case '3.mp3':
-                    gainNode.gain.value = 1.0;  // 3번 파일 기본 볼륨
-                    break;
-                case '4.mp3':
-                    gainNode.gain.value = 1.6;  // 4번 파일 1.6배로 수정
-                    break;
-                default:
-                    gainNode.gain.value = 1.0;
-            }
+            gainNode.gain.value = 1.0;
 
             source.connect(gainNode);
             gainNode.connect(audioContext.destination);
             
-            document.body.appendChild(currentVideo);
-            
             currentButton = this;
             buttonSpan.textContent = pauseIcon;
             
-            currentVideo.play().catch(error => {
-                console.error('재생 중 오류 발생:', error);
+            currentVideo.addEventListener('canplaythrough', function() {
+                currentVideo.play().catch(error => {
+                    console.error('재생 중 오류 발생:', error);
+                    buttonSpan.textContent = playIcon;
+                });
+            }, { once: true });
+
+            currentVideo.onerror = function() {
+                console.error(`파일을 로드할 수 없습니다: ${audioFile}`);
                 buttonSpan.textContent = playIcon;
-            });
+            };
 
             currentVideo.onended = function() {
                 buttonSpan.textContent = playIcon;
-                document.body.removeChild(currentVideo);
                 currentVideo = null;
                 currentButton = null;
-                if (audioContext) {
-                    audioContext.close();
-                    audioContext = null;
-                }
             };
         });
     });
