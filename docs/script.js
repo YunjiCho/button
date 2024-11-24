@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let audioContext = null;
     let gainNode = null;
     
-    const playIcon = '1';
-    const pauseIcon = '⏸️';
+    const playIcon = '▶';
+    const pauseIcon = '❚❚';
     
     buttons.forEach((button, index) => {
-        button.querySelector('span').textContent = (index + 1).toString();
+        button.querySelector('span').textContent = playIcon;
         
         button.addEventListener('click', function() {
             const audioFile = this.dataset.audio;
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentButton === this) {
                 if (currentVideo && !currentVideo.paused) {
                     currentVideo.pause();
-                    buttonSpan.textContent = (index + 1).toString();
+                    buttonSpan.textContent = playIcon;
                 } else if (currentVideo) {
                     currentVideo.play();
                     buttonSpan.textContent = pauseIcon;
@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentVideo) {
                 currentVideo.pause();
                 if (currentButton) {
-                    const prevIndex = Array.from(buttons).indexOf(currentButton);
-                    currentButton.querySelector('span').textContent = (prevIndex + 1).toString();
+                    currentButton.querySelector('span').textContent = playIcon;
                 }
             }
 
@@ -74,11 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             currentVideo.play().catch(error => {
                 console.error('재생 중 오류 발생:', error);
-                buttonSpan.textContent = (index + 1).toString();
+                buttonSpan.textContent = playIcon;
             });
 
             currentVideo.onended = function() {
-                buttonSpan.textContent = (index + 1).toString();
+                buttonSpan.textContent = playIcon;
                 document.body.removeChild(currentVideo);
                 currentVideo = null;
                 currentButton = null;
