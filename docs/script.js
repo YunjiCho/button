@@ -38,7 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const source = audioContext.createMediaElementSource(currentVideo);
             gainNode = audioContext.createGain();
-            gainNode.gain.value = 0.8;
+
+            if (audioFile === '4.mp3') {
+                gainNode.gain.value = 0.6;
+            } else {
+                gainNode.gain.value = 0.8;
+            }
 
             source.connect(gainNode);
             gainNode.connect(audioContext.destination);
